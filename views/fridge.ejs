@@ -1,0 +1,110 @@
+<script type="text/ng-template" id="/home.html">
+    <div class="container-fluid row">
+        <div class="col-sm-6 fridgeBackground">
+            <h1 class="myHeading">Fridge</h1>
+            <div ng-repeat="slot in slots">
+                <div ng-class="{'row' : $index%5==4}">
+                    <div class="thumbnail col-sm-2">
+                        <image title="{{'Shelf ' + slot.shelf + ' Slot ' + slot.column}}" ng-src="{{slot.imageSrc}}"
+                               ng-click="selectSlot()" class="img-responsive" ng-show="!slot.wine.image">
+                        </image>
+                        <image style="max-height: 64px; max-width: 64px;"
+                               title="{{'Shelf ' + slot.shelf + ' Slot ' + slot.column}}"
+                               ng-src="data:image/jpeg;base64,{{slot.wine.image}}"
+                               ng-click="selectSlot()" ng-show="slot.wine.image">
+                        </image>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-5 col-sm-offset-1">
+            <h1 class="myHeading">Details</h1>
+            <form ng-submit="updateWine()" class="form-horizontal" name="wineDetails">
+                <div class="form-group">
+                    <label class="control-label" for="shelf">Shelf:</label>
+                    <input class="form-control " type="text" placeholder="Shelf" id="shelf" ng-model="shelf" readonly>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="slot">Slot:</label>
+                    <input class="form-control" type="text" placeholder="Slot" id="slot" ng-model="column" readonly>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="winery">Winery:</label>
+                    <input class="form-control" type="text" placeholder="Winery" id="winery" ng-model="winery">
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="varietal">Varietal:</label>
+                    <input class="form-control" type="text" placeholder="Varietal" name="varietal" id="varietal"
+                           ng-model="varietal"
+                           required>
+                    <div role="alert" class="error" ng-messages="wineDetails.varietal.$error"
+                         ng-messages-include="messages.html"></div>
+
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="name">Name:</label>
+                    <input class="form-control" type="text" placeholder="Name" id="name" ng-model="name">
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="year">Year:</label>
+                    <input class="form-control" type="number" min="1990" placeholder="Year" id="year" ng-model="year">
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="bestFrom">Best to drink from:</label>
+                    <input class="form-control" type="number" min="2010" placeholder="Best to drink from" id="bestFrom"
+                           ng-model="bestFrom">
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="bestTo">Keep until:</label>
+                    <input class="form-control" type="number" min="2010" placeholder="Keep until" id="bestTo"
+                           ng-model="bestTo">
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="price">Price $:</label>
+                    <input type="number" class="form-control" min="1" max="1000" placeholder="Price" id="price"
+                           ng-model="price">
+                </div>
+                <div class="form-group" >
+                    <button type="submit" class="col-sm-3 btn btn-primary myAddButton" ng-show="isLoggedIn()">{{isVacant ? "Add a new one" :
+                        "Amend Records" }}
+                    </button>
+                    <button class="btn btn-primary" ng-click="removeBottle()" ng-disabled="isVacant || !id" ng-show="isLoggedIn()">Let's drink
+                        it...
+                    </button>
+                    <a ng-hide="isVacant || !id" ng-href="#/wine/{{id}}" class="btn  btn-primary">Score, Tasting
+                        notes, Comments</a>
+                </div>
+            </form>
+
+            <form name="myForm"  ng-show="isLoggedIn()">
+                <div class="form-group">
+                    <legend>Upload wine bottle label</legend>
+                    <label class="control-label" for="fileSelect">Picture:</label>
+                    <input type="file" ngf-select="" ng-model="picFile" name="file" ngf-accept="'image/*'" required=""
+                           ngf-resize="{width:64, height:64, type: 'image/jpeg', centerCrop: false}"
+                           id="fileSelect" ng-disabled="!id">
+                    <div role="alert" class="error" ng-messages="myForm.file.$error"
+                         ng-messages-include="messages.html"></div>
+                    <br>
+                </div>
+                <div>
+                    <button class="btn btn-primary myAddButton" ng-disabled="!myForm.$valid || !id"
+                            ng-click="uploadPic(picFile)">Submit
+                    </button>
+                    <img ngf-src="picFile" class="thumb">
+                    <span class="progress" ng-show="picFile.progress >= 0">
+                        <div style="width:{{picFile.progress}}%" ng-bind="picFile.progress + '%'" class="ng-binding">
+
+                        </div>
+                    </span>
+                    <span ng-show="picFile.result">Upload Successful</span>
+                </div>
+                <br>
+            </form>
+            <div ng-hide="isLoggedIn()">
+                <h5>You need to <a href="/#/login">Log in</a> or <a href="/#/register">Register</a> before you can add amend wine records.
+                </h5>
+            </div>
+        </div>
+    </div>
+</script>

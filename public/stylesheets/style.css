@@ -1,0 +1,61 @@
+body {
+    padding: 50px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+    color: #00B7FF;
+}
+
+.myHeading {
+    color: steelblue;
+    font-family: Arial;
+}
+
+.fridgeBackground {
+    background-color: lightgrey;
+    text-align: center;
+    border-radius: 8px;
+    border-color: steelblue;
+    border-width: thin;
+    border-style: solid;
+    padding-left:6pc;
+}
+
+.dataEntryArea {
+    padding: 5px;
+    border-radius: 8px;
+    border-color: steelblue;
+    border-width: thin;
+    border-style: solid;
+}
+
+.currencyinput {
+    background-color: white;
+    border: 1px inset #ccc;
+}
+
+.myAddButton {
+    margin-right: 5px;
+}
+
+.thumb {
+    width: 24px;
+    height: 24px;
+    float: none;
+    position: relative;
+    top: 7px;
+}
+
+form .progress {
+    line-height: 15px;
+}
+.commentsBody{
+    font-size: 20px;
+}
+
+.error{
+    color: red;
+}
+
+

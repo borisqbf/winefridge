@@ -1,0 +1,54 @@
+<script type="text/ng-template" id="/wineComments.html">
+    <div class="page-header">
+        <h3>
+            <span ng-show="wine.winery">
+                {{wine.winery}}&nbsp;
+            </span>
+            <span ng-show="wine.name">
+                {{wine.name}}&nbsp;
+            </span>
+            <span ng-show="wine.varietal">
+                {{wine.varietal.join()}}
+            </span>
+        </h3>
+    </div>
+    <div ng-repeat="comment in wine.comments">
+        <h4><span ng-show="comment.score"><u><b>{{comment.score}}</b> - </u></span><span ng-show="comment.author"><u>by {{comment.author}}</u></span></h4>
+        <span class="commentsBody">
+            {{comment.body}}
+        </span>
+    </div>
+    <div ng-show="wine.comments.length==0">
+        <h4>No scoring, tasting notes or comments are found for this wine</h4>
+
+    </div>
+    <form ng-submit="addComment()" ng-show="isLoggedIn()">
+        <h3>Add a new comment</h3>
+
+        <div class="form-group row">
+            <div class="col-sm-3">
+                <label class="control-label" for="score">Score:</label>
+                <input type="number" min="1" max="100" class="form-control" placeholder="Score" id="score" ng-model="score"/>
+            </div>
+            <div class="col-sm-9">
+                <label class="control-label" for="by">By:</label>
+                <input type="text" class="form-control" id="by" placeholder="Author" ng-model="author"/>
+            </div>
+        </div>
+
+        <br/>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="body">Comment:</label>
+            <div>
+                <textarea class="form-control" rows="12" id="body" placeholder="Comment" ng-model="body"/>
+            </div>
+        </div>
+        <div class="row">
+            <button type="submit" class="btn btn-primary">Add</button>
+            <a ng-href="#/home/{{wine._id}}" class="btn  btn-primary">Back to the fridge</a>
+        </div>
+    </form>
+    <div ng-hide="isLoggedIn()">
+        <h5>You need to <a href="/#/login">Log in</a> or <a href="/#/register">Register</a> before you can comment.</h5>
+    </div>
+</script>
