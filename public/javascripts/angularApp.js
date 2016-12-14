@@ -173,7 +173,7 @@ app.controller('MainCtlr', [
         };
         $scope.removeBottle = function () {
             if ($scope.id) {
-                wines.removeWine($scope.id);
+                wines.removeWine($scope.id, $scope.shelf, $scope.column);
                 clearDetailsPanel();
                 $scope.isVacant = true;
             }
@@ -270,9 +270,10 @@ app.factory('wines', ['$http', 'auth', 'slots', 'Upload', '$timeout',
             }).success(function (data) {
                 o.wines.push(data);
                 var slot = slots.getSlot(data.shelf, data.column);
-                if (slot)
+                if (slot) {
                     slot.wine = data;
-                slot.imageSrc = w.category === "red" ? "/images/red-wine.png" : "/images/white-wine.png";
+                    slot.imageSrc = (slot.wine.category === "red") ? "/images/red-wine64.png" : "/images/white-wine64.png";
+                }
             });
         };
 
@@ -285,7 +286,7 @@ app.factory('wines', ['$http', 'auth', 'slots', 'Upload', '$timeout',
                     var slot = slots.getSlot(data.shelf, data.column);
                     if (slot) {
                         slot.wine = data;
-                        slot.imageSrc = w.category === "red" ? "/images/red-wine.png" : "/images/white-wine.png";
+                        slot.imageSrc = slot.wine.category === "red" ? "/images/red-wine64.png" : "/images/white-wine64.png";
                     }
                 });
             }
@@ -300,14 +301,14 @@ app.factory('wines', ['$http', 'auth', 'slots', 'Upload', '$timeout',
             return null;
         };
 
-        o.removeWine = function (id) {
+        o.removeWine = function (id, shelf, column) {
             var wine = o.findById(id);
             if (wine) {
                 wine.isConsumed = true;
                 return $http.put('/wines/' + id, wine, {
                     headers: {Authorization: 'Bearer ' + auth.getToken()}
                 }).success(function (data) {
-                    slots.removeWine(data.shelf, data.column);
+                    slots.removeWine(shelf, column);
                 });
             }
         };
