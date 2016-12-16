@@ -13,6 +13,8 @@ var WineSchema = new mongoose.Schema({
     isConsumed: Boolean,
     image: String,
     category: String,
+    changedBy: String,
+    lastModified: Date,
     comments: [{type:mongoose.Schema.ObjectId, ref: 'Comment'}]
 });
 

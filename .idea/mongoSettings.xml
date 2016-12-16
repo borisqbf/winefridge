@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MongoConfiguration">
+    <option name="serverConfigurations">
+      <list>
+        <ServerConfiguration>
+          <option name="serverUrls">
+            <list>
+              <option value="localhost:27017" />
+            </list>
+          </option>
+          <option name="sshTunnelingConfiguration">
+            <SshTunnelingConfiguration />
+          </option>
+        </ServerConfiguration>
+        <ServerConfiguration>
+          <option name="password" value="1eNs9U0btIczVFy3BxkFA9qbu779YXQFbdGvoETbPjFbb0i3AWxPd42bQ8jjAOIbTpMHiP6bCvAhbvsVAyCN2w==" />
+          <option name="serverUrls">
+            <list>
+              <option value="borisqbfhotmail.documents.azure.com:10250" />
+            </list>
+          </option>
+          <option name="sshTunnelingConfiguration">
+            <SshTunnelingConfiguration />
+          </option>
+          <option name="sslConnection" value="true" />
+          <option name="username" value="borisqbfhotmail" />
+        </ServerConfiguration>
+      </list>
+    </option>
+    <option name="shellPath" value="C:\Program Files\MongoDB\Server\3.2\bin\mongo.exe" />
+  </component>
+</project>
