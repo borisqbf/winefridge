@@ -8,7 +8,7 @@
                         <image title="{{'Shelf ' + slot.shelf + ' Slot ' + slot.column}}" ng-src="{{slot.imageSrc}}"
                                ng-click="selectSlot()" class="img-responsive" ng-show="!slot.wine.image">
                         </image>
-                        <image style="max-height: 64px; max-width: 64px;"
+                        <image style="height: 64px; width: 64px;"
                                title="{{'Shelf ' + slot.shelf + ' Slot ' + slot.column}}"
                                ng-src="data:image/jpeg;base64,{{slot.wine.image}}"
                                ng-click="selectSlot()" ng-show="slot.wine.image">
